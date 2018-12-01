@@ -72,9 +72,17 @@ function ConvertHandler() {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
-    var result;
+
+    const convertTable = {
+      gal: galToL,
+      l: 1 / galToL,
+      mi: miToKm,
+      km: 1 / miToKm,
+      lbs: lbsToKg,
+      kg: 1 / lbsToKg
+    };
     
-    return result;
+    return initNum * convertTable[initUnit];
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
