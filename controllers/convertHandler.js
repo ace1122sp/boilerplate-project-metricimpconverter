@@ -7,29 +7,65 @@
 */
 
 function ConvertHandler() {
-  
+  this.getFirstLetterIndex = function(input) {
+    const regex = /[a-zA-Z]/;
+    return input.indexOf(input.match(regex));
+  }
   this.getNum = function(input) {
-    var result;
+    let result;
+    const firstLetterIndex = this.getFirstLetterIndex(input);
+
+    if (firstLetterIndex < 1) return 'invalid input';    
+    result = input.slice(0, firstLetterIndex);
+
+    // check if input has double fraction
+    const secondFraction = result.indexOf('/', result.indexOf('/') + 1);
+    if (secondFraction > 0) result = 'invalid input';
     
     return result;
   };
   
   this.getUnit = function(input) {
-    var result;
+    let result;
+    const validUnits = ['gal', 'l', 'mi', 'km', 'lbs', 'kg', 'GAL', 'L', 'MI', 'KM', 'LBS', 'KG'];
+    const firstLetterIndex = this.getFirstLetterIndex(input);
+
+    if (firstLetterIndex < 1 ) return 'invalid input';
+    
+    const unit = input.slice(firstLetterIndex);
+    const validUnit = validUnits.includes(unit);
+    
+    validUnit ? result = unit : result = 'invalid input';
     
     return result;
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result;
+    const initUnitLowerCase = initUnit.toLowerCase();
+    const units = {
+      gal: 'l',
+      l: 'gal',
+      mi: 'km',
+      km: 'mi',
+      lbs: 'kg',
+      kg: 'lbs'
+    }
     
-    return result;
+    return units[initUnitLowerCase];
   };
 
   this.spellOutUnit = function(unit) {
-    var result;
-    
-    return result;
+    const unitLowerCase = unit.toLowerCase();
+    const units = {
+      gal: 'gallon',
+      l: 'liter',
+      mi: 'mile',
+      km: 'kilometer',
+      lbs: 'pound',
+      kg: 'kilogram'
+    }
+
+    return units[unitLowerCase];
   };
   
   this.convert = function(initNum, initUnit) {
