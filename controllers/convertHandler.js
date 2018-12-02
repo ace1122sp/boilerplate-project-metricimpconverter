@@ -15,7 +15,7 @@ function ConvertHandler() {
     let result;
     const firstLetterIndex = this.getFirstLetterIndex(input);
 
-    if (firstLetterIndex < 1) return 'invalid input';    
+    if (firstLetterIndex == 0) return 1;    
     result = input.slice(0, firstLetterIndex);
 
     // check if input has double fraction
@@ -86,11 +86,13 @@ function ConvertHandler() {
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
+    const spelledeOutInitUnits = this.spellOutUnit(initUnit) + 's';
+    const spelledOutReturnUnits = this.spellOutUnit(returnUnit) + 's';
+    const result = `${initNum} ${spelledeOutInitUnits} converts to ${returnNum} ${spelledOutReturnUnits}`;
     
     return result;
   };
-  
+
 }
 
 module.exports = ConvertHandler;
