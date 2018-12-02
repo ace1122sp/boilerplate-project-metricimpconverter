@@ -36,11 +36,11 @@ module.exports = function (app) {
       let response;
       
       if (res.body.initNum === 'invalid input' && res.body.initUnit === 'invalid input') {
-        response = Object.assign({}, res.body, { message: 'invalid number and unit' }); 
+        response = Object.assign({}, res.body, { string: 'invalid number and unit' }); 
       } else if (res.body.initNum === 'invalid input') {
-        response = Object.assign({}, res.body, { message: 'ivalid number' });
+        response = Object.assign({}, res.body, { string: 'ivalid number' });
       } else if (res.body.initUnit === 'invalid input') {
-        response = Object.assign({}, res.body, { message: 'invalid unit' });
+        response = Object.assign({}, res.body, { string: 'invalid unit' });
       } else {
         response = {
           initNum: res.body.initNum,
