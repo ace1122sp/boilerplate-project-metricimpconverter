@@ -21,7 +21,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet({
   hidePoweredBy: true,
-  noSniff: true
+  noSniff: true,
+  xssFilter: true
 }));
 
 
