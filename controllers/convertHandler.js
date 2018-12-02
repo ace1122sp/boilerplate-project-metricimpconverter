@@ -30,7 +30,7 @@ function ConvertHandler() {
     const validUnits = ['gal', 'l', 'mi', 'km', 'lbs', 'kg', 'GAL', 'L', 'MI', 'KM', 'LBS', 'KG'];
     const firstLetterIndex = this.getFirstLetterIndex(input);
 
-    if (firstLetterIndex < 1 ) return 'invalid input';
+    if (firstLetterIndex < 0 ) return 'invalid input';
     
     const unit = input.slice(firstLetterIndex);
     const validUnit = validUnits.includes(unit);
@@ -82,7 +82,10 @@ function ConvertHandler() {
       kg: 1 / lbsToKg
     };
     
-    return initNum * convertTable[initUnit];
+    // round to 5 decimal digits
+    const result = Math.round(initNum * convertTable[initUnit.toLowerCase()] * 10**5) / 10**5;
+
+    return result;
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {

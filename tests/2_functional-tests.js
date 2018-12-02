@@ -23,7 +23,7 @@ suite('Functional Tests', function() {
        chai.request(server)
         .get('/api/convert')
         .query({ input: '10L' })
-        .end(function(err, res) {
+        .end(function(err, res) {          
           assert.equal(res.status, 200);
           assert.equal(res.body.initNum, 10);
           assert.equal(res.body.initUnit, 'L');
@@ -40,7 +40,7 @@ suite('Functional Tests', function() {
           .end(function(err, res) {
             assert.equal(res.status, 200);
             assert.equal(res.body.initNum, 32);
-            assert.equal(res.body.initUnit, 'g');
+            assert.equal(res.body.initUnit, 'invalid input');
             done();
           })
       });
@@ -51,8 +51,8 @@ suite('Functional Tests', function() {
           .query({ input: '3/7.2/4kg' })
           .end(function(err, res) {
             assert.equal(res.status, 200);
-            assert.equal(res.body.initNum, 'invalid number')
-            assert.equal(res.body.initUnit, 'kg')
+            assert.equal(res.body.initNum, 'invalid input');
+            assert.equal(res.body.initUnit, 'kg');
             done();
           });
       });  
@@ -62,9 +62,9 @@ suite('Functional Tests', function() {
           .get('/api/convert')
           .query({ input: '3/7.2/4kilomegagram' })
           .end(function(err, res) {
-            assert.equal(res.status, 200)
-            assert.equal(res.body.initNum, 'invalid number')
-            assert.equal(res.body.initUnit, 'invalid unit')
+            assert.equal(res.status, 200);
+            assert.equal(res.body.initNum, 'invalid input');
+            assert.equal(res.body.initUnit, 'invalid input');
             done();
           });
       });
@@ -73,7 +73,7 @@ suite('Functional Tests', function() {
         chai.request(server)
           .get('/api/convert')
           .query({ input: 'kg' })
-          end(function(err, res) {
+          .end(function(err, res) {
             assert.equal(res.status, 200)
             assert.equal(res.body.initNum, 1);
             assert.equal(res.body.initUnit, 'kg')
